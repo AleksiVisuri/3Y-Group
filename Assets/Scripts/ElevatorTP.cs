@@ -36,7 +36,9 @@ public class ElevatorTP : MonoBehaviour
         yield return new WaitForSeconds(tpWaitTime);
 
         playerTransform.transform.position = new Vector3(playerTransform.transform.position.x, tpHeight, playerTransform.transform.position.z);
-        
+
+        Physics.SyncTransforms();
+
         upperFloorAnimator.SetTrigger("Open");
 
         if (currentFloorEnemy != null)
