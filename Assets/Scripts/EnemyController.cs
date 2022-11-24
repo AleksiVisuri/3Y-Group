@@ -1,9 +1,27 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using Newtonsoft.Json;
+using System.IO;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 public class EnemyController : MonoBehaviour
 {
+    private Dictionary<int, EnemyStats> levelList;
+
+    [Header("Level System")]
+    [SerializeField] private int difficulty;
+    [SerializeField] private int floor;
+    [SerializeField] private Dictionary<int, float> floorMultplr = new Dictionary<int, float>
+    {
+        { 2, 1f },
+        { 3, 1.1f },
+        { 4, 1.2f },
+        { 5, 1.3f },
+        { 6, 1.4f },
+    };
+
     [Header("Navigation")]
     [SerializeField] private NavMeshAgent agent;
 
@@ -57,6 +75,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        if (ReadJSON()) { SetStats(); }
+
         currentPatrolPoint = -1;
         state = EnemyState.patrol;
         agent.speed = walkingSpeed;
@@ -264,4 +284,45 @@ public class EnemyController : MonoBehaviour
             return false;
         return true;
     }
+
+    private bool ReadJSON()
+    {
+        using (StreamReader r = new StreamReader("Assets/Scripts/JSONs/EnemyStats.json"))
+        {
+            string json = r.ReadToEnd();
+            levelList = JsonConvert.DeserializeObject<Dictionary<int, EnemyStats>>(json);
+            if (levelList != null) { return true; } else { Debug.Log("JSON read failed"); return false; }
+        }
+    }
+    private void SetStats()
+    {
+        
+        int diff = DifficultyButtons.difficulty;
+        var diffC = levelList[diff];
+        float diffM = floorMultplr[floor];
+
+        Debug.Log($"got value multiplier {diffM} from floor {floor}");
+
+        viewDistance = diffC.viewDistance;
+        viewAngle = diffC.viewAngle;
+        patrolTurnSpeed = diffC.patrolTurnSpeed * diffM;
+        checkTurnSpeed = diffC.checkTurnSpeed * diffM;
+        walkingSpeed = diffC.walkingSpeed * diffM;
+        sprintingSpeed = diffC.sprintingSpeed * diffM;
+
+        Debug.Log($"set stats from diff {diff}");
+    }
+}
+
+internal class EnemyStats
+{
+    public float viewDistance;
+    public float viewAngle;
+
+    public float patrolTurnSpeed;
+
+    public float checkTurnSpeed;
+
+    public float walkingSpeed;
+    public float sprintingSpeed;
 }

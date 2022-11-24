@@ -1,0 +1,26 @@
+{
+  "1": {
+    "viewDistance": 6,
+    "viewAngle": 50,
+    "PatrolTurnSpeed": 0.1,
+    "checkTurnSpeed": 3.6,
+    "walkingSpeed": 1.8,
+    "sprintingSpeed": 2.5
+  },
+  "2": {
+    "viewDistance": 8,
+    "viewAngle": 70,
+    "PatrolTurnSpeed": 0.1,
+    "checkTurnSpeed": 3.6,
+    "walkingSpeed": 2,
+    "sprintingSpeed": 3.5
+  },
+  "3": {
+    "viewDistance": 10,
+    "viewAngle": 90,
+    "PatrolTurnSpeed": 0.2,
+    "checkTurnSpeed": 4,
+    "walkingSpeed": 2.2,
+    "sprintingSpeed": 3.8
+  }
+}
