@@ -43,12 +43,10 @@ public class Interaction : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("WE HIT SOMETHING");
         if ((interactLayer & (1 << other.gameObject.layer)) != 0)
         {
             InteractUI.gameObject.SetActive(true);
             isInteractable = true;
-            Debug.Log("InteractUI Aktivoitu");
         }
     }
 

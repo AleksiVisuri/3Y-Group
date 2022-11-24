@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DifficultyButtons : MonoBehaviour
 {
-    [SerializeField] public static int difficulty;
+    [SerializeField] public static int difficulty = 2;
     public Button easy, normal, hard;
     // Start is called before the first frame update
     public void OnPress(Button button)
