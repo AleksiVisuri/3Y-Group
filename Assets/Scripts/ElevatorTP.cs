@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ElevatorTP : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class ElevatorTP : MonoBehaviour
     [SerializeField] private GameObject upperFloorEnemy;
     [SerializeField] private GameObject currentFloorEnemy;
 
+    [Header("Objective")]
+    [SerializeField] private TextMeshProUGUI ObjectiveUI;
+    [SerializeField] private GameObject finalEnemy;
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player"))
@@ -34,6 +39,8 @@ public class ElevatorTP : MonoBehaviour
             upperFloorEnemy.SetActive(true);
 
         yield return new WaitForSeconds(tpWaitTime);
+        Debug.Log("TPWaitTime Aloitettu");
+        ObjectiveUI.SetText("Find the Code");
 
         playerTransform.transform.position = new Vector3(playerTransform.transform.position.x, tpHeight, playerTransform.transform.position.z);
 
@@ -43,5 +50,8 @@ public class ElevatorTP : MonoBehaviour
 
         if (currentFloorEnemy != null)
             currentFloorEnemy.SetActive(false);
+
+        if (finalEnemy != null)
+            ObjectiveUI.SetText("You'll never truly escape!");
     }
 }
