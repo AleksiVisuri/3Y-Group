@@ -12,6 +12,8 @@ public class WinGame : MonoBehaviour
 
     public AudioManager AM;
 
+    public GameObject objective;
+
 
 
     // Start is called before the first frame update
@@ -38,6 +40,8 @@ public class WinGame : MonoBehaviour
         winPanel.SetActive(true);
 
         mainMenuButton.SetActive(true);
+
+        objective.SetActive(false);
 
         Time.timeScale = 0f;
 

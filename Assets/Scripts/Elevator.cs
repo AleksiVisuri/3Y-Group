@@ -17,7 +17,9 @@ public class Elevator : MonoBehaviour, IInteraction
     //Oikean kerroken oikea objekti eli TP asetetaan aktiiviseksi
     [SerializeField] GameObject tpObject;
 
-
+    [Header("Objective")]
+    [SerializeField] private TextMeshProUGUI ObjectiveUI;
+    [SerializeField] private bool firstInteract;
 
     // Kun pelaaja interactaa hissin kanssa, hän syöttää 4-numeroisen
     // sarjan numeroita hissikoodiksi, jos tämä on oikein (ja sama mitä koodilapussa),
@@ -33,6 +35,7 @@ public class Elevator : MonoBehaviour, IInteraction
 
             PlayerMovementv2.lockMovement = true;
             CameraController.lockCamera = true;
+
             Debug.Log("Aktivoitu UI");
         }
         else
@@ -49,6 +52,15 @@ public class Elevator : MonoBehaviour, IInteraction
 
             Debug.Log("Deaktivoitu UI");
         }
+
+        
+        if (firstInteract)
+        {
+            ObjectiveUI.SetText("Find the Code");
+            firstInteract = false;
+            Debug.Log("Ensimmäinen interact");
+        }
+            
         /*passCodeInputField.SetActive(true);
         passCodeInputField.GetComponent("Text");
          

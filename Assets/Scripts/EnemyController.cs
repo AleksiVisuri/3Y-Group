@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
 
     [Header("Level System")]
     [SerializeField] private int difficulty;
-    [SerializeField] private int floor;
+    [SerializeField] public int floor;
     [SerializeField] private Dictionary<int, float> floorMultplr = new Dictionary<int, float>
     {
         { 2, 1f },

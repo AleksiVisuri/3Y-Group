@@ -8,7 +8,11 @@ public class CodeTag : MonoBehaviour, IInteraction
     public TextMeshProUGUI textContainer;
     [HideInInspector] public string codeStorage;
     bool isActive = false;
+    
     [SerializeField] private GameObject UI;
+
+    [SerializeField] private TextMeshProUGUI ObjectiveUI;
+
     public void Interact()
     {
 
@@ -39,12 +43,14 @@ public class CodeTag : MonoBehaviour, IInteraction
             Debug.Log("Deaktivoitu UI");
 
         }
+        ObjectiveUI.SetText("Get to the Elevator");
     }
 
     // Start is called before the first frame update
     void Start()
     {
         codeStorage = Random.Range(0, 10) + "" + Random.Range(0, 10) + "" + Random.Range(0, 10) + "" + Random.Range(0, 10);
+
     }
 
     // Update is called once per frame
