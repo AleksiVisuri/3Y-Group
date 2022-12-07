@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 72697941962771671}
   - component: {fileID: 72697941962771670}
   - component: {fileID: 72697941962771669}
+  - component: {fileID: 8213749416150556163}
   m_Layer: 2
   m_Name: EnemyWithMesh Variant
   m_TagString: Enemy
@@ -541,6 +542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccbebe4a05191c046aa9f54f14fb3d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 0
+  floor: 0
   agent: {fileID: 72697943095403185}
   eyePoint: {fileID: 72697942889462596}
   viewDistance: 8
@@ -554,6 +557,7 @@ MonoBehaviour:
   attackPoint: {fileID: 5184052567609273537}
   attackDistance: 1.5
   attackEndTime: 5
+  loseGame: {fileID: 0}
   walkingSpeed: 2
   sprintingSpeed: 3.5
   doorMoveSpeed: 0.1
@@ -843,6 +847,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &8213749416150556163
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72697941962771663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 8
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &72697941983871117
 GameObject:
   m_ObjectHideFlags: 0
