@@ -37,6 +37,14 @@ public class PlayerMovementv2 : MonoBehaviour
     bool isGrounded = false;
     bool blockStaminaRegeneration = false;
 
+    public enum MoveState
+    {
+        still,
+        walking,
+        running
+    }
+
+    [SerializeField] public MoveState ms;
 
     private void Start()
     {
@@ -44,14 +52,13 @@ public class PlayerMovementv2 : MonoBehaviour
 
         //audioManager = FindObjectOfType<AudioManager>();
 
-
         currentSpeed = walkSpeed;
         currentStamina = maxStamina;
+        ms = MoveState.still;
     }
 
     private void FixedUpdate()
     {
-
         CheckInput();
     }
 
@@ -66,13 +73,22 @@ public class PlayerMovementv2 : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
+        if (x != 0f || z != 0f)
+        {
+            if (CheckInput())
+                ms = MoveState.running;
+            else
+                ms = MoveState.walking;
+        }
+        else
+        {
+            ms = MoveState.still;
+        }
+
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
-
-
         }
-
 
         Vector3 move = transform.right * x + transform.forward * z;
 
@@ -81,20 +97,21 @@ public class PlayerMovementv2 : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
-
     }
 
 
-    void CheckInput()
+    bool CheckInput()
     {
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxis("Vertical") > 0 && currentStamina > 0)
+        {
             Run();
-
+            return true;
+        }
         else
+        {
             Walk();
-
-
-
+            return false;
+        }
     }
 
 
@@ -125,7 +142,6 @@ public class PlayerMovementv2 : MonoBehaviour
             currentStamina = 0;
             StartCoroutine(stopRunning());
         }
-
     }
 
     IEnumerator stopRunning()

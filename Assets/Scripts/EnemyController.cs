@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using JetBrains.Annotations;
 
 public class EnemyController : MonoBehaviour
 {
@@ -22,6 +24,10 @@ public class EnemyController : MonoBehaviour
         { 6, 1.4f },
     };
 
+    [Header("Player")]
+    [SerializeField] GameObject playerPrefab;
+    [SerializeField] static PlayerMovementv2 playerMovement;
+
     [Header("Navigation")]
     [SerializeField] private NavMeshAgent agent;
 
@@ -30,6 +36,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float viewDistance;
     [SerializeField] private float viewAngle;
     [SerializeField] private LayerMask viewBlockingLayers;
+
+    [Header("Hearing")]
+    [SerializeField] public float hearingRange;
 
     [Header("Patrol")]
     [SerializeField] private PatrolPath patrolPath;
@@ -60,6 +69,8 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Animator Controller")]
     [SerializeField] private EnemyAnimationController enemyAnimationController;
 
+    
+
     private EnemyState state;
     private bool isAttacking;
 
@@ -82,10 +93,16 @@ public class EnemyController : MonoBehaviour
         agent.speed = walkingSpeed;
 
         agent.autoTraverseOffMeshLink = false;
-    }
+
+        playerMovement = playerPrefab.GetComponent<PlayerMovementv2>();
+
+        hearingRange = gameObject.GetComponent<SphereCollider>().radius;
+}
 
     private void FixedUpdate()
     {
+        playerMovement = playerPrefab.GetComponent<PlayerMovementv2>();
+
         if (HandleOffMeshLink())
             return;
 
@@ -97,6 +114,27 @@ public class EnemyController : MonoBehaviour
             Check();
         else if (state == EnemyState.checkturn)
             CheckTurn();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && !Physics.Linecast(eyePoint.position, player.position, viewBlockingLayers))
+        {
+            if (playerMovement.ms == PlayerMovementv2.MoveState.running)
+            {
+                patrolTurnTarget = player;
+                Patrol();
+            }
+            else if (playerMovement.ms == PlayerMovementv2.MoveState.walking && Vector3.Distance(eyePoint.position, player.position) < (hearingRange / 2))
+            {
+                patrolTurnTarget = player;
+                Patrol();
+            }
+            else
+            {
+
+            }
+        }
     }
 
     private bool HandleOffMeshLink()
