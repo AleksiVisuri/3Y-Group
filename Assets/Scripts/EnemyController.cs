@@ -130,10 +130,6 @@ public class EnemyController : MonoBehaviour
                 patrolTurnTarget = player;
                 Patrol();
             }
-            else
-            {
-
-            }
         }
     }
 
