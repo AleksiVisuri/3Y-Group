@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LoseGame : MonoBehaviour
 {
 
-
+    [SerializeField] public GameObject interactUI;
 
     public GameObject losePanel;
 
@@ -14,17 +14,16 @@ public class LoseGame : MonoBehaviour
 
 
     public void loseGame()
-    {
-
+    { 
         losePanel.SetActive(true);
 
         mainMenuButton.SetActive(true);
 
+        interactUI.SetActive(false);
+
         Time.timeScale = 0f;
 
-        Cursor.lockState = CursorLockMode.None;
-
-        
+        Cursor.lockState = CursorLockMode.None;   
     }
 
 

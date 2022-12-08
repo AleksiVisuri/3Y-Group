@@ -343,6 +343,7 @@ public class EnemyController : MonoBehaviour
         checkTurnSpeed = diffC.checkTurnSpeed * diffM;
         walkingSpeed = diffC.walkingSpeed * diffM;
         sprintingSpeed = diffC.sprintingSpeed * diffM;
+        hearingRange = diffC.hearingRange * diffM;
 
         Debug.Log($"set stats from diff {diff}");
     }
@@ -359,4 +360,6 @@ internal class EnemyStats
 
     public float walkingSpeed;
     public float sprintingSpeed;
+
+    public float hearingRange;
 }
