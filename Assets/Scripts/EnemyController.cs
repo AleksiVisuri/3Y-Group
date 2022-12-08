@@ -60,6 +60,11 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Animator Controller")]
     [SerializeField] private EnemyAnimationController enemyAnimationController;
 
+    public GameObject localJumpscare;
+
+
+
+
     private EnemyState state;
     private bool isAttacking;
 
@@ -174,6 +179,8 @@ public class EnemyController : MonoBehaviour
         isAttacking = true;
 
         enemyAnimationController.StartAttackAnimation();
+
+        localJumpscare.SetActive(true);
 
         yield return new WaitForSeconds(attackEndTime);
 
