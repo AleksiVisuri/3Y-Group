@@ -127,7 +127,7 @@ public class EnemyController : MonoBehaviour
                 patrolTurnTarget = player;
                 Patrol();
             }
-            else if (playerMovement.ms == PlayerMovementv2.MoveState.walking && Vector3.Distance(eyePoint.position, player.position) < (hearingRange / 2))
+            else if (playerMovement.ms == PlayerMovementv2.MoveState.walking && Vector3.Distance(eyePoint.position, player.position) < (hearingRange / 3))
             {
                 patrolTurnTarget = player;
                 Patrol();

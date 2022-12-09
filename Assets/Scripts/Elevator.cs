@@ -74,7 +74,7 @@ public class Elevator : MonoBehaviour, IInteraction
 
     public void CheckCode()
     {
-        if (codeTag.codeStorage != passCodeInputField.text && passCodeInputField.text != "2022")
+        if (codeTag.codeStorage != passCodeInputField.text)
             return;
 
         gameObject.SetActive(false);

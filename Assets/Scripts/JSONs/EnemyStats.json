@@ -6,7 +6,7 @@
     "checkTurnSpeed": 3.6,
     "walkingSpeed": 1.8,
     "sprintingSpeed": 2.5,
-    "hearingRange": 6
+    "hearingRange": 8
   },
   "2": {
     "viewDistance": 8,
@@ -15,7 +15,7 @@
     "checkTurnSpeed": 3.6,
     "walkingSpeed": 2,
     "sprintingSpeed": 3.5,
-    "hearingRange": 8
+    "hearingRange": 12
   },
   "3": {
     "viewDistance": 10,
@@ -24,6 +24,6 @@
     "checkTurnSpeed": 4,
     "walkingSpeed": 2.2,
     "sprintingSpeed": 3.8,
-    "hearingRange": 10
+    "hearingRange": 16
   }
 }

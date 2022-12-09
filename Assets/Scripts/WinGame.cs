@@ -57,7 +57,7 @@ public class WinGame : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
 
 
     }
