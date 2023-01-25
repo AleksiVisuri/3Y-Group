@@ -8,20 +8,28 @@ public class LoseGame : MonoBehaviour
 
     [SerializeField] public GameObject interactUI;
 
-    public GameObject losePanel;
+    public Animator _anim;
 
     public GameObject mainMenuButton;
 
+    public GameObject enemies;
+
+    public PlayerMovementv2 PM2;
+
+    public CharacterController CC;
 
     public void loseGame()
-    { 
-        losePanel.SetActive(true);
+    {
+        _anim.SetTrigger("playGameOver");
 
         mainMenuButton.SetActive(true);
 
+        enemies.SetActive(false);
+
         interactUI.SetActive(false);
 
-        Time.timeScale = 0f;
+        PM2.enabled = false;
+        CC.enabled = false;
 
         Cursor.lockState = CursorLockMode.None;   
     }
